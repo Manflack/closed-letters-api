@@ -17,9 +17,5 @@ export default class Message {
             }
         }
     }
-
-    getData(): string {
-        return this.data;
-    }
 }
 

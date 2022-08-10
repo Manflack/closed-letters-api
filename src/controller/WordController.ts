@@ -11,11 +11,11 @@ const countClosedCharsByWord = new CountClosedCharsByWord(charClosedLocalReposit
 
 async function analyzeWord(req: Request, res: Response) {
   const { data } = req.body;
-  const iMessage = new Message(data);
+  const message = new Message(data);
 
   try {
-    iMessage.validateData();
-    const closedChars: any = countClosedCharsByWord.execute(data, true);
+    message.validateData();
+    const closedChars: any = countClosedCharsByWord.execute(message.data, true);
     return res.json(new ApiResponse(closedChars));
   } catch (e) {
     if (e instanceof NotValidData) {
