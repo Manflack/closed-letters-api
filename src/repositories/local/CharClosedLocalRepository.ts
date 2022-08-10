@@ -6,7 +6,7 @@ const getEntries = () => charClosedPreset;
 let DATABASE = new Map<string, number>();
 let EXTENDED_DATABASE = new Map<string, number>();
 
-export default class implements CharClosedRepository {
+export default class CharClosedLocalRepository implements CharClosedRepository {
 
     constructor() {
         const dataset = getEntries().dataset;
@@ -32,10 +32,6 @@ export default class implements CharClosedRepository {
         if(value === undefined)
             return 0;
         return value;
-    }
-
-    public putCharToDatabase(_char: string, quantity: number): void {
-        DATABASE.set(_char, quantity);
     }
 
     public putCharToExtendedDatabase(_char: string, quantity: number): void {

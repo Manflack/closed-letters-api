@@ -3,7 +3,5 @@ export default interface CharClosedRepository {
 
     getCharFromExtendedDatabase(_char: string): number;
 
-    putCharToDatabase(_char: string, quantity: number): void;
-
     putCharToExtendedDatabase(_char: string, quantity: number): void;
 }
