@@ -1,0 +1,7 @@
+node_modules
+.devcontainer
+build
+*.env
+*.log
+*.error
+package-lock.json
