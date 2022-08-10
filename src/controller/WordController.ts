@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import Message from "../core/entities/Message"
-import ApiError from "../controller/ApiError"
-import ApiResponse from "../controller/ApiResponse"
+import ApiError from "./response/ApiError"
+import ApiResponse from "./response/ApiResponse"
 import CountClosedCharsByWord from '../core/services/CountClosedCharsByWord';
 import CharClosedLocalRepository from '../repositories/local/CharClosedLocalRepository';
 import NotValidData from '../core/exceptions/NotValidData';
