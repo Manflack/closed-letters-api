@@ -8,7 +8,7 @@ export default class CountClosedCharsByWord {
         this.charClosedRepository = charClosedRepository;
     }
 
-    public countChars(inputWord: string, useNormal: boolean): number {
+    public execute(inputWord: string, useNormal: boolean): number {
         let closedLetters: number = 0;
 
         for (var letter of inputWord) {

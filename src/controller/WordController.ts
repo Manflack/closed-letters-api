@@ -15,7 +15,7 @@ async function analyzeWord(req: Request, res: Response) {
 
   try {
     iMessage.validateData();
-    const closedChars: any = countClosedCharsByWord.countChars(data, true);
+    const closedChars: any = countClosedCharsByWord.execute(data, true);
     return res.json(new ApiResponse(closedChars));
   } catch (e) {
     if (e instanceof NotValidData) {
@@ -31,7 +31,7 @@ async function analyzeWordByExtendedDatabase(req: Request, res: Response) {
 
   try {
     iMessage.validateData();
-    const closedChars: any = countClosedCharsByWord.countChars(data, false);
+    const closedChars: any = countClosedCharsByWord.execute(data, false);
     return res.json(new ApiResponse(closedChars));
   } catch (e) {
     if (e instanceof NotValidData) {
