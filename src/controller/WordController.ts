@@ -21,6 +21,7 @@ async function analyzeWord(req: Request, res: Response) {
     if (e instanceof NotValidData) {
       return res.status(400).json(new ApiError(e.message, data));
     }
+    console.log(e);
     return res.status(500).json(new ApiError("internal server error", data));
   }
 }
