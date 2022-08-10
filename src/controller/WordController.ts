@@ -1,36 +1,28 @@
 import { Request, Response } from 'express';
-
+import Message from "../core/entities/Message"
+import ApiError from "../controller/ApiError"
+import ApiResponse from "../controller/ApiResponse"
 import CountClosedCharsByWord from '../core/services/CountClosedCharsByWord';
 import CharClosedLocalRepository from '../repositories/local/CharClosedLocalRepository';
+import NotValidData from '../core/exceptions/NotValidData';
 
 const charClosedLocalRepository = new CharClosedLocalRepository();
 const countClosedCharsByWord = new CountClosedCharsByWord(charClosedLocalRepository);
 
 async function analyzeWord(req: Request, res: Response) {
-  const { message } = req.body;
-
-  if (!message)
-    return res.status(400).json({
-      message: "Missing body data",
-      type: "error",
-      data: req.body
-    });
+  const { data } = req.body;
+  const iMessage = new Message(data);
 
   try {
-    const closedChars: number = countClosedCharsByWord.countChars(message);
-    return res.json({
-      type: "success",
-      data: {
-        closedChars
-      }
-    })
+    iMessage.validateData();
+    const closedChars: any = countClosedCharsByWord.countChars(data);
+    return res.json(new ApiResponse(closedChars));
   } catch (e) {
-    return res.status(500).json({
-      message: "Processing information error",
-      type: "error",
-      data: e
-    });
+    if (e instanceof NotValidData) {
+      return res.status(400).json(new ApiError(e.message, data));
+    }
+    return res.status(500).json(new ApiError("internal server error", data));
   }
 }
 
-export {analyzeWord};
+export { analyzeWord };
