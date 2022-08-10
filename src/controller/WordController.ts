@@ -6,7 +6,7 @@ import CountClosedCharsByWord from '../core/services/CountClosedCharsByWord';
 import CharClosedLocalRepository from '../repositories/local/CharClosedLocalRepository';
 import NotValidData from '../core/exceptions/NotValidData';
 
-const charClosedLocalRepository = new CharClosedLocalRepository();
+const charClosedLocalRepository = CharClosedLocalRepository.getInstance();
 const countClosedCharsByWord = new CountClosedCharsByWord(charClosedLocalRepository);
 
 async function analyzeWord(req: Request, res: Response) {

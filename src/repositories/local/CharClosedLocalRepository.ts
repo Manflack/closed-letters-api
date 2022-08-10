@@ -8,6 +8,8 @@ let EXTENDED_DATABASE = new Map<string, number>();
 
 export default class CharClosedLocalRepository implements CharClosedRepository {
 
+    private static instance: CharClosedLocalRepository;
+
     constructor() {
         const dataset = getEntries().dataset;
         console.log("Preloading all resources...");
@@ -18,6 +20,13 @@ export default class CharClosedLocalRepository implements CharClosedRepository {
             EXTENDED_DATABASE.set(key, value);
         });
         console.log("Resources loaded.")
+    }
+
+    public static getInstance(): CharClosedLocalRepository {
+        if(!CharClosedLocalRepository.instance) {
+            CharClosedLocalRepository.instance = new CharClosedLocalRepository();
+        }
+        return CharClosedLocalRepository.instance;
     }
 
     public getCharFromDatabase(_char: string): number {
