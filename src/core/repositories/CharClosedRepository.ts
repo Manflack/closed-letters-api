@@ -4,4 +4,6 @@ export default interface CharClosedRepository {
     getCharFromExtendedDatabase(_char: string): number;
 
     putCharToExtendedDatabase(_char: string, quantity: number): void;
+
+    resetExtendedDatabase(): void;
 }

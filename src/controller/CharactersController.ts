@@ -6,6 +6,7 @@ import ApiResponse from "./response/ApiResponse"
 import Character from '../core/entities/Character';
 
 import SaveCharInteraction from '../core/services/SaveCharInteraction';
+import ResetExtendedDatabase from '../core/services/ResetExtendedDatabase';
 
 import CharClosedLocalRepository from '../repositories/local/CharClosedLocalRepository';
 
@@ -13,6 +14,7 @@ import NotValidData from '../core/exceptions/NotValidData';
 
 const charClosedLocalRepository = CharClosedLocalRepository.getInstance();
 const saveCharInteraction = new SaveCharInteraction(charClosedLocalRepository);
+const resetExtendedDatabase = new ResetExtendedDatabase(charClosedLocalRepository);
 
 async function saveNewCharacterToExtendendDatabase(req: Request, res: Response) {
     const { data } = req.body;
@@ -33,4 +35,9 @@ async function saveNewCharacterToExtendendDatabase(req: Request, res: Response) 
 
 }
 
-export { saveNewCharacterToExtendendDatabase };
+async function resetDatabase(_req: Request, res: Response) {
+    resetExtendedDatabase.execute();
+    return res.json(new ApiResponse("ok"));
+}
+
+export { saveNewCharacterToExtendendDatabase, resetDatabase };

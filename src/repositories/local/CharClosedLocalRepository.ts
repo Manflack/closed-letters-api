@@ -23,7 +23,7 @@ export default class CharClosedLocalRepository implements CharClosedRepository {
     }
 
     public static getInstance(): CharClosedLocalRepository {
-        if(!CharClosedLocalRepository.instance) {
+        if (!CharClosedLocalRepository.instance) {
             CharClosedLocalRepository.instance = new CharClosedLocalRepository();
         }
         return CharClosedLocalRepository.instance;
@@ -31,19 +31,29 @@ export default class CharClosedLocalRepository implements CharClosedRepository {
 
     public getCharFromDatabase(_char: string): number {
         var value = DATABASE.get(_char);
-        if(value === undefined)
+        if (value === undefined)
             return 0;
         return value;
     }
 
     public getCharFromExtendedDatabase(_char: string): number {
         var value = EXTENDED_DATABASE.get(_char);
-        if(value === undefined)
+        if (value === undefined)
             return 0;
         return value;
     }
 
     public putCharToExtendedDatabase(_char: string, quantity: number): void {
         EXTENDED_DATABASE.set(_char, quantity);
+    }
+
+    public resetExtendedDatabase(): void {
+        EXTENDED_DATABASE = new Map<string, number>();
+        const dataset = getEntries().dataset;
+        Object.entries(dataset).forEach(data => {
+            const [key, value] = data;
+            EXTENDED_DATABASE.set(key, value);
+        });
+        console.log("Database reset.");
     }
 }
