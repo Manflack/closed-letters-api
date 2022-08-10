@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { analyzeWord } from './controller/WordController'
+import { analyzeWord, analyzeWordByExtendedDatabase } from './controller/WordController'
 
 const app = express();
 const morgan = require('morgan');
@@ -10,6 +10,7 @@ app.use(cors());
 app.use(morgan('common'))
 
 app.use('/api/v1/analyze-word', analyzeWord);
+app.use('/api/v1/analyze-word-extended', analyzeWordByExtendedDatabase);
 
 app.listen(3000);
 

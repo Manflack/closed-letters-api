@@ -15,6 +15,7 @@ export default class implements CharClosedRepository {
         Object.entries(dataset).forEach(data => {
             const [key, value] = data;
             DATABASE.set(key, value);
+            EXTENDED_DATABASE.set(key, value);
         });
         console.log("Resources loaded.")
     }

@@ -15,7 +15,7 @@ async function analyzeWord(req: Request, res: Response) {
 
   try {
     iMessage.validateData();
-    const closedChars: any = countClosedCharsByWord.countChars(data);
+    const closedChars: any = countClosedCharsByWord.countChars(data, true);
     return res.json(new ApiResponse(closedChars));
   } catch (e) {
     if (e instanceof NotValidData) {
@@ -25,4 +25,20 @@ async function analyzeWord(req: Request, res: Response) {
   }
 }
 
-export { analyzeWord };
+async function analyzeWordByExtendedDatabase(req: Request, res: Response) {
+  const { data } = req.body;
+  const iMessage = new Message(data);
+
+  try {
+    iMessage.validateData();
+    const closedChars: any = countClosedCharsByWord.countChars(data, false);
+    return res.json(new ApiResponse(closedChars));
+  } catch (e) {
+    if (e instanceof NotValidData) {
+      return res.status(400).json(new ApiError(e.message, data));
+    }
+    return res.status(500).json(new ApiError("internal server error", data));
+  }
+}
+
+export { analyzeWord, analyzeWordByExtendedDatabase };
