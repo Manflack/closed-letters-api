@@ -59,3 +59,22 @@ curl --location --request POST 'localhost:3000/api/v1/analyze-word' \
 ```
 curl --location --request POST 'localhost:3000/api/v2/reset-database'
 ```
+Responses
+---
+On Success operation
+```
+{
+    "type": "success",
+    "response": string
+}
+```
+
+On Error operation
+```
+{
+    "type": "error",
+    "message": string,
+    "data": string
+}
+```
+
