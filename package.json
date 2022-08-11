@@ -8,9 +8,6 @@
     "scripts": {
         "tsc": "tsc",
         "build": "tsc --build --clean",
-        "dist": "npm run dist/app.js",
-        "prod": "npm run build && npm run dist",
-        "test": "mocha",
         "dev": "ts-node-esm src/app.ts"
     },
     "dependencies": {
